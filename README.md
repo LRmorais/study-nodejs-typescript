@@ -3,7 +3,7 @@
 <p align="center">
     <img src="https://img.shields.io/static/v1?label=Typescript&message=language&color=blue&style=for-the-badge&logo=typescript" style="display: inline;"/>
     <img src="https://img.shields.io/static/v1?label=ExpressJS&message=framework&color=green&style=for-the-badge&logo=node.js" style="display: inline;"/>
-    <img src="https://img.shields.io/static/v1?label=TypeORM&message=ODM&color=orange&style=for-the-badge&logo=node.js" style="display: inline;"/>
+    <img src="https://img.shields.io/static/v1?label=TypeORM&message=ORM&color=orange&style=for-the-badge&logo=node.js" style="display: inline;"/>
     <img src="https://img.shields.io/static/v1?label=PostgresSQL&message=database&color=blue&style=for-the-badge&logo=postgresql" style="display: inline;"/>
 </p>
 
