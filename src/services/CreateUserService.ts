@@ -4,6 +4,7 @@
  * A senha precisa ser criptografada antes de ir para o banco de dados
  */
 import { getRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import User from '../models/User';
 
 interface Request {
@@ -26,11 +27,14 @@ class CreateUserService {
       throw new Error('Email address already user.');
     }
 
-    // caso passe pela verificação, create apenas cria uma instancia e nao salva no bd
+    // caso passe pela verificação, a senha será criptografada com o hash do bcrypt
+    const hashedPassword = await hash(password, 8);
+
+    // create apenas cria uma instancia e nao salva no bd
     const user = usersRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     // salva na base
