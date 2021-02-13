@@ -1,13 +1,13 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateAppointments1612902768415
-  implements MigrationInterface {
+export default class CreateUsers1613227583876 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'appointments',
+        name: 'users',
         columns: [
           {
+            // id do usuario
             name: 'id',
             type: 'uuid',
             isPrimary: true,
@@ -15,14 +15,20 @@ export default class CreateAppointments1612902768415
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'provider',
+            // nome do usuario
+            name: 'name',
             type: 'varchar',
-            isNullable: false,
           },
           {
-            name: 'date',
-            type: 'timestamp with time zone',
-            isNullable: false,
+            // email do usuario
+            name: 'email',
+            type: 'varchar',
+            // garante que o email senha unico
+            isUnique: true,
+          },
+          {
+            name: 'password',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -40,8 +46,6 @@ export default class CreateAppointments1612902768415
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('appointments');
+    await queryRunner.dropTable('users');
   }
 }
-// comando cli para criação de tabela -> yarn typeorm migration:run
-// comando cli para reverter criação de tabela -> yarn typeorm migration:revert
