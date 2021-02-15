@@ -4,6 +4,8 @@ import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
+import AppError from '../errors/AppError';
+
 interface TokenPayload {
   iat: number;
   exp: number;
@@ -19,7 +21,7 @@ export default function ensureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new Error('JWT token is missing');
+    throw new AppError('JWT token is missing', 401);
   }
   // Dividir o token em 2 partes(espaço em branco foi usado como parametro de separação)
   const [, token] = authHeader.split(' ');
@@ -37,6 +39,6 @@ export default function ensureAuthenticated(
     // se está tudo correto a aplicação segue
     return next();
   } catch {
-    throw new Error('Invalid JWT token');
+    throw new AppError('Invalid JWT token', 401);
   }
 }

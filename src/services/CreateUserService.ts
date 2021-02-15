@@ -7,6 +7,8 @@ import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 import User from '../models/User';
 
+import AppError from '../errors/AppError';
+
 interface Request {
   name: string;
   email: string;
@@ -24,7 +26,7 @@ class CreateUserService {
 
     // se estiver duplicado retornara error
     if (checkUserExists) {
-      throw new Error('Email address already user.');
+      throw new AppError('Email address already user.');
     }
 
     // caso passe pela verificação, a senha será criptografada com o hash do bcrypt
